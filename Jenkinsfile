@@ -1,18 +1,17 @@
 pipeline {
-  agent any
-  stages{
-    
-  stage('Clone'){
-    steps{
-      git url: 'https://github.com/Mayur-2403/lab-003.git',
-        branch: 'main'
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                cleanWs() 
+                checkout scm
+            }
+        }
+        stage('Debug & Run') {
+            steps {
+                sh 'ls -R' 
+                sh 'python3 script.py'
+            }
+        }
     }
-  }
-  stage('Run Script'){
-    steps{
-      sh 'chmod +x script.sh'
-      sh './script.sh'
-    }
-  }
-}
 }
